@@ -18,8 +18,8 @@
 
 class DatEntry {
 private:
-	char Letter = '\0';
-	char Unknown = '□';
+	char Letter = '\0';	// Can also be a number!
+	char IsActuallyUsed = '□';	// Used to note which letters are actually used (as discovered from looking at answer011.dat), either □ (U+25A1) or empty
 	std::uint64_t OffsetX = 0;
 	std::string ExtraParam = "DefaultExtraParam";
 
@@ -30,17 +30,19 @@ public:
 	std::string Stringize(void) const {
 
 		std::string const letter_str = std::string{ Letter };
-		std::string const unknown_str = std::string{ Unknown };
+		std::string const actually_used_str = std::string{ IsActuallyUsed };
 
 		return std::string(
 			letter_str + "," +
-			unknown_str + "," +
+			actually_used_str + "," +
 			std::to_string(OffsetX) + "," +
 			ExtraParam
 		);
 	}
 
-	static char GetUnknownDefault(void) {
+	static char GetActuallyUsedDefault(void) {
+		// Either □ (U+25A1) or empty
+
 		/*
 		// Unicode
 		return static_cast<char>(0x25A1);
@@ -50,13 +52,13 @@ public:
 
 	static std::uint64_t GetNormalDistance(void) {
 
-		// TODO: Why was 90 defined as "normal distance"?
+		// 90 is commonly used in the .dat between two letters
 		return 90;
 	}
 
 	static std::uint64_t GetSpaceDistance(void) {
 
-		// TODO: Is this true?
+		// 120 is communly used after a space
 		return 120;
 	}
 
@@ -66,7 +68,7 @@ public:
 	}
 
 	GETSET(Letter);
-	GETSET(Unknown);
+	GETSET(IsActuallyUsed);
 	GETSET(OffsetX);
 	GETSET(ExtraParam);
 };
