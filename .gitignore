@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+*.vsidx
+*.lock
+
+.vs/*
+*.pdb
+SeesawHelper/x64/*
