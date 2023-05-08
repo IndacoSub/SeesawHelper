@@ -35,6 +35,8 @@
 
 .vs/*
 *.pdb
-SeesawHelper/x64/*
 *.csv
 *.txt
+*.bak
+SeesawHelper/x64/*
+x64/*
